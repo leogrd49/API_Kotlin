@@ -1,6 +1,4 @@
-const { Pool } = require('pg');
-require('dotenv').config();
-
+// Dans db.js
 const pool = new Pool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -9,4 +7,17 @@ const pool = new Pool({
     port: process.env.DB_PORT
 });
 
-module.exports = pool;
+// Ajouter des listeners d'événements
+pool.on('connect', () => {
+    console.log('Base de données connectée avec succès');
+});
+
+pool.on('error', (err) => {
+    console.error('Erreur de connexion:', err);
+    console.log('Configuration:', {
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        database: process.env.DB_NAME,
+        port: process.env.DB_PORT
+    });
+});

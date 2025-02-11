@@ -4,6 +4,15 @@ const pool = require('./db');
 
 const app = express();
 
+// Au début de server.js
+console.log('Variables d\'environnement:', {
+    DB_HOST: process.env.DB_HOST,
+    DB_USER: process.env.DB_USER,
+    DB_NAME: process.env.DB_NAME,
+    DB_PORT: process.env.DB_PORT,
+    PORT: process.env.PORT
+});
+
 // Middleware
 app.use(cors());
 app.use(express.json());
