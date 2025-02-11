@@ -8,6 +8,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get('/', (req, res) => {
+    res.json({ message: "Bienvenue sur l'API Kotlin IIA" });
+});
+
 // Routes pour les plages
 app.get('/api/plages', async (req, res) => {
     try {
@@ -54,6 +58,16 @@ app.get('/api/pieces/:id', async (req, res) => {
 
 // Démarrage du serveur
 const PORT = process.env.PORT || 3000;
+
+// Dans server.js, avant app.listen()
+pool.query('SELECT NOW()', (err, res) => {
+    if (err) {
+        console.error('Erreur de connexion à la base de données:', err);
+    } else {
+        console.log('Connexion à la base de données réussie');
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Serveur démarré sur le port ${PORT}`);
 });
